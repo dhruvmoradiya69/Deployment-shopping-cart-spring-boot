@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shop-cart-config
+  namespace: shop-cart-ns
+data:
+  MYSQL_DATABASE: ecommerce_db
+  

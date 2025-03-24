@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+#----------mysql container----------#
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=Test@123
+      - MYSQL_DATABASE=ecommerce_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - shop_data:/var/lib/mysql
+    networks:
+      - shop_network
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+#----------java shopping container----------#
+  mainapp:
+    image: dhruvmoradiya69000/shopping-cart:latest
+    container_name: shopapp
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/ecommerce_db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=Test@123
+      - SPRING_MAIL_USERNAME=hello@gmail.com
+      - SPRING_MAIL_PASSWORD=12345678
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "5050:8080"
+    networks:
+      - shop_network
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5050/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  shop_data:
+
+networks:
+  shop_network:

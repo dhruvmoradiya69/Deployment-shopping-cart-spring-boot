@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: shop-cart-pv
+  namespace: shop-cart-ns
+  labels:
+    app: shop-cart
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  hostPath:
+    path: "/tmp/shop-cart-mysql"

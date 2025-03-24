@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-cart-deployment
+  namespace: shop-cart-ns
+  labels:
+    app: shop-cart
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: shop-cart
+  template:
+    metadata:
+      labels:
+        app: shop-cart
+    spec:
+      containers:
+      - name: shop-cart
+        image: dhruvmoradiya69000/shopping-cart:latest
+        ports:
+        - containerPort: 8080
+        env:
+        # Add the following environment variables
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:mysql://mysql-headless.shop-cart-ns.svc.cluster.local:3306/ecommerce_db
+        - name: SPRING_DATASOURCE_USERNAME
+          value: root
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: shop-cart-secret
+              key: MYSQL_ROOT_PASSWORD
+        - name: SPRING_MAIL_USERNAME
+          value: hello@gmail.com
+        - name: SPRING_MAIL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: shop-cart-secret
+              key: SPRING_MAIL_PASSWORD

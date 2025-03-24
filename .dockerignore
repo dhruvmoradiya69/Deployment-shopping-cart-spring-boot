@@ -1,0 +1,38 @@
+# Ignore version control files
+.git
+
+# Ignore build output
+target/
+
+# Ignore IDE-specific files
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+.idea
+*.iws
+*.iml
+*.ipr
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+.vscode/
+
+# Ignore temporary files
+*.log
+*.tmp
+*.swp
+*.bak
+*.old
+
+# Ignore Kubernetes configuration files
+k8s/
+
+# Ignore test files
+src/test/
