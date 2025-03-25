@@ -81,4 +81,14 @@
 		</plugins>
 	</build>
 
+	<distributionManagement>
+    <repository>
+        <id>maven-releases</id>
+        <url>https://a42b-2a09-bac5-3b0a-1aa0-00-2a7-32.ngrok-free.app/repository/maven-releases/</url>
+    </repository>
+    <snapshotRepository>
+        <id>maven-snapshots</id>
+        <url>https://a42b-2a09-bac5-3b0a-1aa0-00-2a7-32.ngrok-free.app/repository/maven-snapshots/</url>
+    </snapshotRepository>
+</distributionManagement>
 </project>
