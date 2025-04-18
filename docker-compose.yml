@@ -32,16 +32,17 @@ services:
       - SPRING_DATASOURCE_PASSWORD=Test@123
       - SPRING_MAIL_USERNAME=hello@gmail.com
       - SPRING_MAIL_PASSWORD=12345678
+      - SERVER_PORT=8081
     depends_on:
       mysql:
         condition: service_healthy
     ports:
-      - "5050:8080"
+      - "8081:8081"
     networks:
       - shop_network
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:5050/actuator/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:8081/actuator/health || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
