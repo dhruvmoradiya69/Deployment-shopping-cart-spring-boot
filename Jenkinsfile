@@ -1,4 +1,5 @@
 pipeline {
+    
     agent any
 
     stages {
@@ -7,15 +8,13 @@ pipeline {
                 git url: "https://github.com/dhruvmoradiya69/Deployment-shopping-cart-spring-boot.git", branch: "main"
             }
         }
+        
         stage('Build Image') {
-            parallel {
-                stage('Build Frontend Image') {
-                    steps {
-                        sh "docker build -t shopping-cart:latest:latest ."
-                    }
-                }
+            steps {
+                sh "docker build -t shopping-cart:latest ."
             }
         }
+        
         stage("Push Docker Images") {
             steps {
                 withCredentials([usernamePassword(
@@ -29,14 +28,16 @@ pipeline {
                 }
             }
         }
+        
         stage('Deploy Application') {
             steps {
                 sh "docker compose down && docker compose up -d --build"
             }
         }
+        
         stage('Remove Unused Images'){
             steps{
-                sh "docker image prune -a -f"
+               //sh "docker image prune -a -f"
             }
         }
     }

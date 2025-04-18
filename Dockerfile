@@ -17,7 +17,7 @@ FROM openjdk:17-alpine AS proud
 COPY --from=build /src/target/*.jar /src/target/shopping.jar
 
 # Expose port 5050 for the application to listen on
-EXPOSE 8080
+EXPOSE 8081
 
 # Define the entry point to run the application
 ENTRYPOINT [ "java", "-jar", "/src/target/shopping.jar" ]
