@@ -1,5 +1,5 @@
 pipeline {
-    
+
     agent any
 
     stages {
@@ -37,7 +37,7 @@ pipeline {
         
         stage('Remove Unused Images'){
             steps{
-               //sh "docker image prune -a -f"
+               sh "docker image prune -a -f"
             }
         }
     }
