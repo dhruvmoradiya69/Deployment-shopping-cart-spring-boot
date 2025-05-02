@@ -14,7 +14,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /
+          - path: /signin
             pathType: Prefix
             backend:
               service:
