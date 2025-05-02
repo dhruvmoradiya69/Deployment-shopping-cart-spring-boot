@@ -23,7 +23,7 @@ spec:
         env:
         # Add the following environment variables
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:mysql://mysql-headless.shop-cart-ns.svc.cluster.local:3306/ecommerce_db
+          value: jdbc:mysql://mysql-headless:3306/ecommerce_db
         - name: SPRING_DATASOURCE_USERNAME
           value: root
         - name: SPRING_DATASOURCE_PASSWORD

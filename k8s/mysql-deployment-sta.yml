@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: mysql
   namespace: shop-cart-ns
@@ -9,7 +9,6 @@ spec:
   selector:
     matchLabels:
       app: mysql
-  serviceName: mysql-headless
   replicas: 1
   template:
     metadata:
@@ -35,13 +34,7 @@ spec:
         volumeMounts:
         - name: mysql-data
           mountPath: /var/lib/mysql
-  volumeClaimTemplates:
-  - metadata:
-      name: mysql-data
-      labels:
-        app: mysql
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 1Gi
+      volumes:
+      - name: mysql-data
+        persistentVolumeClaim:
+          claimName: shop-cart-pvc
