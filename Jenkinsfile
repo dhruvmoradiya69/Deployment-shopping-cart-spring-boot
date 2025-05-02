@@ -5,12 +5,14 @@ pipeline {
     environment {
         MAVEN_HOME = tool 'maven'
         SONAR_HOME = tool 'sonar'
+        NODE_HOME = tool 'npm'
+        PATH = "${NODE_HOME}/bin:${env.PATH}"
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git url: "git@github.com:dhruvmoradiya69/Deployment-shopping-cart-spring-boot.git", branch: "main"
+                git url: "https://github.com/dhruvmoradiya69/Deployment-shopping-cart-spring-boot.git", branch: "main"
             }
         }
         
